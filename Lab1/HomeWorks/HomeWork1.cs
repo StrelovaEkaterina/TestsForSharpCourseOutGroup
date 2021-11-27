@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Lab1.HomeWorks
 {
     /// <summary>
@@ -13,7 +15,28 @@ namespace Lab1.HomeWorks
         /// <returns>Массив в котором поменяны местами максимальный отрицательный элемент и минимальный положительный</returns>
         public static int[] Variant1(int[] temp)
         {
-            throw new System.Exception("Не реализован вариант1");
+            int maxValue = temp[0];
+            int minValue = temp[0];
+            int maxi = 0;
+            int mini = 0;
+
+            maxValue = temp.Where(x => x < 0).DefaultIfEmpty(temp[0]).Max();
+            minValue = temp.Where(x => x > 0).DefaultIfEmpty(temp[0]).Min();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (maxValue == temp[i])
+                {
+                    maxi = i;
+                }
+
+                if (minValue == temp[i])
+                {
+                    mini = i;
+                }
+            }
+            temp[mini] = maxValue;
+            temp[maxi] = minValue;
+            return temp;
         }
 
         /// <summary>
@@ -23,7 +46,13 @@ namespace Lab1.HomeWorks
         /// <returns>Сумма элементов, состоящих на чётных позициях массива</returns>
         public static int Variant2(int[] temp)
         {
-            throw new System.Exception("Не реализован вариант2");
+            int sum = 0;
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (i % 2 == 0)
+                    sum = sum + temp[i];
+            }
+            return sum;
         }
 
         /// <summary>
@@ -33,7 +62,12 @@ namespace Lab1.HomeWorks
         /// <returns>Массив в котором поменяны отрицательные элементы на нули</returns>
         public static int[] Variant3(int[] temp)
         {
-            throw new System.Exception("Не реализован вариант3");
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i] < 0)
+                    temp[i] = 0;
+            }
+            return temp;
         }
 
         /// <summary>
@@ -43,7 +77,13 @@ namespace Lab1.HomeWorks
         /// <returns>Массив в котором *3 каждый положительный элемент, который стоит перед отрицательным</returns>
         public static int[] Variant4(int[] temp)
         {
-            throw new System.Exception("Не реализован вариант4");
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i] > 0)
+                    if (temp[i + 1] < 0)
+                        temp[i] = temp[i] * 3;
+            }
+            return temp;
         }
 
         /// <summary>
@@ -53,7 +93,18 @@ namespace Lab1.HomeWorks
         /// <returns>Разница между средним арифметическим и значение минимального элемента</returns>
         public static double Variant5(int[] temp)
         {
-            throw new System.Exception("Не реализован вариант5");
+            double result = 0;
+            double sum = 0;
+            double avg = 0;
+            int minValue = temp[0];
+            minValue = temp.Where(x => x != 0).DefaultIfEmpty(temp[0]).Min();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                sum = sum + temp[i];
+            }
+            avg = sum / temp.Length;
+            result = avg - minValue;
+            return result;
         }
     }
 }
