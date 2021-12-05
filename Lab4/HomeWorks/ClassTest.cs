@@ -9,7 +9,8 @@ namespace Lab4.HomeWorks
     {
         public static void MetrodWithException(int temp) 
         {
-            
+            if (temp == 10 || temp == 4 || temp == 99)
+                throw new Exception();
         }
     }
 }
